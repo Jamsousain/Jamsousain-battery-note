@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>鋰電池電氣特性與充放電工程手冊 (專業工程術語版)</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --accent: #38bdf8;
+      --accent-hover: #0ea5e9;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --success: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    nav {
+      width: 280px;
+      background-color: #0b1120;
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    nav h2 {
+      font-size: 1.15rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      display: block;
+    }
+
+    nav a:hover {
+      background-color: var(--card-bg);
+      color: var(--accent);
+    }
+
+    main {
+      flex: 1;
+      padding: 2.5rem 3.5rem;
+      max-width: 1100px;
+      overflow-y: auto;
+    }
+
+    header {
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    header h1 {
+      font-size: 2.1rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    section {
+      margin-bottom: 3.5rem;
+      scroll-margin-top: 2rem;
+    }
+
+    h2 {
+      font-size: 1.45rem;
+      color: #fff;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    h2::before {
+      content: "";
+      width: 4px;
+      height: 1.2rem;
+      background-color: var(--accent);
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      color: var(--accent);
+      margin: 1.5rem 0 0.75rem 0;
+    }
+
+    p, ul, ol {
+      color: #cbd5e1;
+      margin-bottom: 1rem;
+    }
+
+    ul, ol {
+      padding-left: 1.25rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+
+    .card-title {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .card-value {
+      font-size: 1.35rem;
+      font-weight: bold;
+      color: var(--accent);
+      margin: 0.4rem 0;
+    }
+
+    .card-desc {
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      margin: 1.25rem 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+
+    th, td {
+      padding: 0.85rem 1.1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background-color: #0b1120;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    tr:hover td {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    .calc-box {
+      background: linear-gradient(180deg, var(--card-bg) 0%, #162032 100%);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .calc-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      background-color: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    input[type="range"] {
+      padding: 0.2rem 0;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--accent);
+    }
+
+    .quick-c-buttons {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .quick-c-btn {
+      padding: 0.35rem 0.75rem;
+      border: 1px solid var(--border);
+      background-color: var(--bg);
+      color: var(--text-muted);
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.15s ease;
+    }
+
+    .quick-c-btn:hover, .quick-c-btn.active {
+      border-color: var(--accent);
+      color: #fff;
+      background-color: rgba(56, 189, 248, 0.15);
+    }
+
+    .calc-results {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .res-card {
+      background-color: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+      padding: 0.8rem 1rem;
+    }
+
+    .res-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .res-val {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: var(--accent);
+      margin-top: 0.2rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .badge-success { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .badge-warning { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+    .badge-danger { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+
+    .callout {
+      border-left: 4px solid var(--accent);
+      background-color: rgba(56, 189, 248, 0.07);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1.25rem 0;
+      font-size: 0.95rem;
+    }
+    .callout-danger {
+      border-left-color: var(--danger);
+      background-color: rgba(239, 68, 68, 0.07);
+    }
+
+    .code-term {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      color: #38bdf8;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+    }
+
+    .temp-indicator {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    @media (max-width: 860px) {
+      .container { flex-direction: column; }
+      nav { width: 100%; height: auto; position: static; padding: 1rem 1.5rem; }
+      main { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <nav>
+    <h2>電池電氣指南</h2>
+    <ul>
+      <li><a href="#si-units">一、單位字母大小寫規範</a></li>
+      <li><a href="#chemistry-types">二、鋰電化學體系對比 (三元 vs LFP)</a></li>
+      <li><a href="#storage-voltage">三、保存電壓與滿電禁忌</a></li>
+      <li><a href="#temp-simulation">四、環境溫度動態試算</a></li>
+      <li><a href="#discharge-calc">五、放電與壓降試算 (1S～18S)</a></li>
+      <li><a href="#charge-calc">六、充電 C 數模擬 (1C/2C/3C)</a></li>
+      <li><a href="#balancing">七、多串平衡與電芯不一致性</a></li>
+      <li><a href="#ir-health">八、內阻 (mΩ) 核心指標與壽命</a></li>
+      <li><a href="#low-temp">九、低溫風險與析鋰機制</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <header>
+      <h1>鋰電池電氣特性與充放電工程手冊</h1>
+      <p>標準電氣單位規範・三元鋰與磷酸鐵鋰(LFP)對比・保存電壓・溫度內阻衰減動態試算・1S～18S 互動模擬</p>
+    </header>
+
+    <!-- 一、單位字母大小寫規範 -->
+    <section id="si-units">
+      <h2>一、國際標準單位符號與大小寫規範</h2>
+      <p>在電氣工程與電池規格中，字母大小寫代表完全不同的數量級，不可混淆：</p>
+      
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>字首 / 符號</th>
+              <th>數量級乘數</th>
+              <th>名稱</th>
+              <th>電池領域正確範例</th>
+              <th>常見嚴重筆誤說明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="code-term">m</span> (小寫)</td>
+              <td><strong>10⁻³ (千分之一)</strong></td>
+              <td>毫 (milli)</td>
+              <td><strong>mA</strong> (毫安培), <strong>mAh</strong> (毫安時), <strong>mΩ</strong> (毫歐姆)</td>
+              <td>誤寫成大寫 M 時，數值直接相差 10 億倍！</td>
+            </tr>
+            <tr>
+              <td><span class="code-term">k</span> (小寫)</td>
+              <td><strong>10³ (一千)</strong></td>
+              <td>千 (kilo)</td>
+              <td><strong>kW</strong> (千瓦), <strong>kWh</strong> (度/千瓦時), <strong>kΩ</strong> (千歐姆)</td>
+              <td>國際度量衡中，kilo 必須小寫（如 kg, km, kW）。</td>
+            </tr>
+            <tr>
+              <td><span class="code-term">M</span> (大寫)</td>
+              <td><strong>10⁶ (一百萬)</strong></td>
+              <td>兆 (Mega)</td>
+              <td><strong>MW</strong> (百萬瓦), <strong>MWh</strong> (百萬瓦時, 大型儲能櫃容量)</td>
+              <td>千萬不可將容量 mAh 寫成 MAh，MAh 代表百萬安時。</td>
+            </tr>
+            <tr>
+              <td><span class="code-term">V / A / W / Ω</span></td>
+              <td><strong>單位主體</strong></td>
+              <td>人名大寫</td>
+              <td>伏特 (V), 安培 (A), 瓦特 (W), 歐姆 (Ω)</td>
+              <td>源於科學家姓氏之單位符號，一律必須大寫。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 二、鋰電化學體系對比 -->
+    <section id="chemistry-types">
+      <h2>二、主流鋰電化學體系對比（三元鋰 vs 磷酸鐵鋰 LFP）</h2>
+      <p>常見的「4.2V 滿電 / 3.7V 標稱 / 3.0V 截止」<strong>僅適用於三元鋰（NCM/NCA）與標準鋰聚合物（LiPo）</strong>。磷酸鐵鋰（LFP）等其他體系電壓完全不同，不可共用充電參數！</p>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>化學體系</th>
+              <th>單芯滿電電壓</th>
+              <th>標稱電壓 (平台)</th>
+              <th>截止放電電壓</th>
+              <th>黃金保存電壓</th>
+              <th>電化學特性與應用場景</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>三元鋰 / LiPo (NCM / NCA)</strong></td>
+              <td><span style="color: #38bdf8;">4.20 V</span><br><small style="color: #94a3b8;">(高壓版 4.35~4.40V)</small></td>
+              <td><strong>3.70 V</strong><br><small style="color: #94a3b8;">(高壓版 3.80~3.85V)</small></td>
+              <td>3.00 V ~ 3.20 V</td>
+              <td><span style="color: #fbbf24; font-weight: bold;">3.80 V ~ 3.85 V</span><br><small>(嚴禁滿電保存)</small></td>
+              <td><strong>能量密度最高（200~300 Wh/kg）</strong>、重量輕。廣泛用於消費型無人機、穿越機、智慧型手機及旗艦電動車。熱失控溫度約 200°C。</td>
+            </tr>
+            <tr>
+              <td><strong>磷酸鐵鋰 (LFP, LiFePO₄)</strong></td>
+              <td><span style="color: #34d399;">3.65 V</span></td>
+              <td><strong>3.20 V</strong></td>
+              <td>2.50 V</td>
+              <td><span style="color: #34d399; font-weight: bold;">3.28 V ~ 3.32 V</span></td>
+              <td><strong>熱失控溫度高達 500°C、循環壽命長（2000~4000次）</strong>、針刺不起火。放電電壓平台極平坦（放電至 80% 電壓幾乎都在 3.2V 左右）。常見於大型儲能站、商用電動載具。</td>
+            </tr>
+            <tr>
+              <td><strong>鈦酸鋰 (LTO, Li₄Ti₅O₁₂)</strong></td>
+              <td>2.80 V</td>
+              <td><strong>2.30 V ~ 2.40 V</strong></td>
+              <td>1.50 V</td>
+              <td>2.40 V</td>
+              <td>超高壽命（&gt;10000次）、極佳低溫充放電耐受度（-30°C 亦可充電），但能量密度較低。適用於特種極地裝備、特定高頻快充巴士。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 三、保存電壓與滿電禁忌 -->
+    <section id="storage-voltage">
+      <h2>三、保存電壓（Storage Voltage）管理與滿電存放禁忌</h2>
+      
+      <div class="callout callout-danger">
+        <strong>鋰聚合物 / 三元鋰核心禁忌：</strong> 滿電（4.20V / 芯）存放超過 48 小時，即會啟動不可逆的化學老化！長期滿電存放是電池膨脹鼓包、內阻暴增與性能衰退的第一大殺手。
+      </div>
+
+      <h3>1. 為什麼三元鋰 / LiPo 絕不能滿電保存？（微觀電化學機理）</h3>
+      <ul>
+        <li><strong>正極處於高化學活性脫鋰態：</strong> 4.20V 滿電時，正極晶格中的鋰離子大部分已被抽空，材料處於強氧化性的熱力學高能不穩定狀態。高電位會持續與有機電解液發生劇烈的副反應，分解產氣（主要是烷烴與 CO₂），導致鋁塑膜**鼓包膨脹**。</li>
+        <li><strong>過度生長的 SEI 膜與不可逆容量損失：</strong> 長期維持在 4.2V 高壓下，負極固態電解質界面膜（SEI 膜）會持續增厚破裂並消耗活性鋰，造成電池可用容量跳水，並使**歐姆與極化內阻（IR）成倍暴增**。</li>
+        <li><strong>大幅降低熱失控起始溫度：</strong> 滿電存放的電池自發熱分解臨界溫度比保存電壓（3.85V）低了近 50°C。在炎熱夏季或車廂內，滿電電池遇到輕微高溫就可能誘發自燃。</li>
+      </ul>
+
+      <div class="calc-box">
+        <h3 style="margin-top: 0; margin-bottom: 1rem; color: #fff;">保存電壓（Storage）整組總電壓試算器</h3>
+        <div class="calc-row">
+          <div class="form-group">
+            <label for="storageChem">電池化學體系</label>
+            <select id="storageChem" onchange="runStorageCalc()">
+              <option value="lipo" selected>三元鋰 / LiPo (標準每芯 3.85V)</option>
+              <option value="lfp">磷酸鐵鋰 LFP (標準每芯 3.28V)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="storageS">電池串數 (1S 至 18S)</label>
+            <select id="storageS" onchange="runStorageCalc()">
+              <option value="1">1S</option>
+              <option value="2">2S</option>
+              <option value="3">3S</option>
+              <option value="4">4S</option>
+              <option value="6" selected>6S</option>
+              <option value="8">8S</option>
+              <option value="10">10S</option>
+              <option value="12">12S</option>
+              <option value="14">14S</option>
+              <option value="16">16S</option>
+              <option value="18">18S</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="calc-results">
+          <div class="res-card">
+            <div class="res-label">整組標準保存總電壓 (V)</div>
+            <div class="res-val" id="storageTotalV" style="color: #fbbf24;">23.10 V</div>
+          </div>
+          <div class="res-card">
+            <div class="res-label">滿電存放對照（高危險）</div>
+            <div class="res-val" id="storageFullV" style="color: #ef4444;">25.20 V</div>
+          </div>
+          <div class="res-card">
+            <div class="res-label">充電器操作指引</div>
+            <div class="res-val" id="storageAction" style="font-size: 0.95rem; color: #38bdf8;">執行 Storage 存儲放電 / 充電</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 四、環境溫度動態試算 -->
+    <section id="temp-simulation">
+      <h2>四、環境溫度（-20°C 至 40°C）對等效內阻與可用容量衰減試算</h2>
+      <p>鋰電池在電化學本質上高度依賴環境溫度。低溫下電解液黏度提升、離子穿膜阻抗增加，遵循阿瑞尼斯方程式（Arrhenius equation）呈現<strong>內阻倍增與容量衰退</strong>：</p>
+
+      <div class="calc-box">
+        <div class="calc-row">
+          <div class="form-group" style="flex: 2;">
+            <label for="tempSlider">
+              環境溫度 (Ambient Temp): <strong id="tempDisplay" style="color: #38bdf8; font-size: 1.1rem;">25°C</strong>
+            </label>
+            <input type="range" id="tempSlider" min="-20" max="40" step="1" value="25" oninput="updateTempCalc()">
+            <div class="temp-indicator">
+              <span>-20°C (極寒凍結)</span>
+              <span>0°C (冰點禁充)</span>
+              <span>25°C (常溫基準)</span>
+              <span>40°C (高溫過熱)</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="tempChem">電芯化學體系</label>
+            <select id="tempChem" onchange="updateTempCalc()">
+              <option value="lipo" selected>三元鋰 / LiPo</option>
+              <option value="lfp">磷酸鐵鋰 LFP (低溫衰減更劇烈)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="tempBaseCap">常溫標稱容量 (mAh)</label>
+            <input type="number" id="tempBaseCap" value="16000" step="500" oninput="updateTempCalc()">
+          </div>
+          <div class="form-group">
+            <label for="tempBaseIr">25°C 基準單芯內阻 (mΩ)</label>
+            <input type="number" id="tempBaseIr" value="3.0" step="0.5" oninput="updateTempCalc()">
+          </div>
+        </div>
+
+        <div class="calc-results">
+          <div class="res-card">
+            <div class="res-label">目前溫度單芯等效內阻</div>
+            <div class="res-val" id="tempEffIr">3.00 mΩ</div>
+          </div>
+          <div class="res-card">
+            <div class="res-label">內阻倍增率 (相較於25°C)</div>
+            <div class="res-val" id="tempIrFactor" style="color: #38bdf8;">1.00 ×</div>
+          </div>
+          <div class="res-card">
+            <div class="res-label">低溫可用容量比例</div>
+            <div class="res-val" id="tempCapPercent" style="color: #34d399;">100.0 %</div>
+          </div>
+          <div class="res-card">
+            <div class="res-label">實際可釋出容量</div>
+            <div class="res-val" id="tempActualCap">16000 mAh</div>
+          </div>
+        </div>
+
+        <div class="calc-results" style="margin-top: 1rem; border-top: 1px dashed var(--border); padding-top: 1rem;">
+          <div class="res-card" style="grid-column: span 2;">
+            <div class="res-label">溫度作業安全狀態警報</div>
+            <div class="res-val" id="tempStatusText" style="font-size: 1.05rem; color: #34d399;">常溫環境：充放電效能最佳</div>
+          </div>
+          <div class="res-card" style="grid-column: span 2;">
+            <div class="res-label">外場應對指引</div>
+            <div class="res-val" id="tempActionGuidance" style="font-size: 0.95rem; color: #cbd5e1; font-weight: normal;">
+              可直接依標準規範進行 1.0C 充電與常規載具滿載任務。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 五、放電性能與壓降即時試算 -->
+    <section id="discharge-calc">
+      <h2>五、放電性能與壓降即時試算（支援至 18S 與體系切換）</h2>
+      <div class="calc-box">
+        <div class="calc-row">
+          <div class="form-group">
+            <label for="chemType">電池化學體系</label>
+            <select id="chemType" onchange="runDischargeCalc(); updateChargeCalc();">
+              <option value="lipo" selected>三元鋰 / 鋰聚合物 LiPo (3.7V / 滿電 4.2V)</option>
+              <option value="lfp">磷酸鐵鋰 LFP (3.2V / 滿電 3.65V)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cellCount">串聯數 (S) - 支援 1S 至 18S</label>
+            <select id="cellCount" onchange="runDischargeCalc()">
+              <option value="1">1S</option>
+              <option value="2">2S</option>
+              <option value="3">3S</option>
+              <option value="4">4S</option>
+              <option value="6" selected>6S</option>
+              <option value="8">8S</option>
+              <option value="10">10S</option>
+              <option value="12">12S</option>
+              <option value="14">14S</option>
+              <option value="16">16S</option>
+              <option value="18">18S</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="capMah">標稱容量 (mAh)</label>
+            <input type="number" id="capMah" value="16000" step="500" oninput="runDischargeCalc()">
+          </div>
+          <div class="form-group">
+            <label for="cRate">工作放電倍率 (C)</label>
+            <input type="number" id="cRate" value="3" step="0.5" oninput="runDischargeCalc()">
+          </div>
+          <div class="form-group">
+            <label for="cellIr">單芯平均內阻 (mΩ)</label>
+            <input type="number" id="cellIr" value="3" step="0.5" oninput="runDischargeCalc()">
+          </div>
+        </div>
+
+        <div class="calc-results">
+          <div class="res-card">
+            <div class="res-label">總標稱能量 (Wh)</div>
+            <div class="res-val" id="resWh">355.2 Wh</div>
+          </div>
+          <div class="res-card">
+            <div class="res-label">放電電流 (A)</div>
+            <div class="res-val" id="resAmp">48.0 A</div>
+          </div>
+          <div class="res-card">
+            <div class="res-label">預估全負載續航</div>
+            <div class="res-val" id="resRuntime">20.0 分鐘</div>
+          </div>
+          <div class="res-card">
+            <div class="res-label">負載總壓降 (Voltage Sag)</div>
+            <div class="res-val" id="resSag" style="color: #fbbf24;">0.86 V</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 六、充電 C 數互動試算 -->
+    <section id="charge-calc">
+      <h2>六、充電 C 數（0.5C / 1C / 2C / 3C）安全模擬</h2>
+      <p>C 數為充電電流與額定容量的倍率比：<strong>充電電流 (A) = C 數 × 容量 (Ah)</strong>。高 C 數能大幅縮短充電時間，但會急遽加劇極化電壓、增加發熱與析鋰風險。</p>
+
+      <div class="calc-box">
+        <div class="calc-row">
+          <div class="form-group">
+            <label for="chgChem">充電體系選擇</label>
+            <select id="chgChem" onchange="updateChargeCalc()">
+              <option value="lipo" selected>三元鋰 / LiPo (每芯截止 4.20V)</option>
+              <option value="lfp">磷酸鐵鋰 LFP (每芯截止 3.65V)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="chgCap">電池容量 (mAh)</label>
+            <input type="number" id="chgCap" value="10000" step="500" oninput="updateChargeCalc()">
+          </div>
+          <div class="form-group">
+            <label for="chgS">電池串數 (S)</label>
+            <select id="chgS" onchange="updateChargeCalc()">
+              <option value="1">1S</option>
+              <option value="3">3S</option>
+              <option value="4">4S</option>
+              <option value="6" selected>6S</option>
+              <option value="12">12S</option>
+              <option value="14">14S</option>
+              <option value="18">18S</option>
+            </select>
+          </div>
+          <div class="form-group" style="flex: 1.5;">
+            <label>充電倍率快速設定</label>
+            <div class="quick-c-buttons">
+              <button type="button" class="quick-c-btn" onclick="setCVal(0.5)">0.5C (養護)</button>
+              <button type="button" class="quick-c-btn active" onclick="setCVal(1.0)">1.0C (標準推薦)</button>
+              <button type="button" class="quick-c-btn" onclick="setCVal(2.0)">2.0C (快充)</button>
+              <button type="button" class="quick-c-btn" onclick="setCVal(3.0)">3.0C (極速快充)</button>
+              <button type="button" class="quick-c-btn" onclick="setCVal(5.0)">5.0C (極限超充)</button>
+            </div>
+            <input type="number" id="customCRate" value="1.0" step="0.1" min="0.1" max="10" style="margin-top: 0.5rem;" oninput="onCustomCInput()">
+          </div>
+        </div>
+
+        <div class="calc-results">
+          <div class="res-card">
+            <div class="res-label">設定充電電流</div>
+            <div class="res-val" id="chgCurrent">10.0 A</div>
+          </div>
+          <div class="res-card">
+            <div class="res-label">充飽總耗時 (含 CV 階段)</div>
+            <div class="res-val" id="chgDuration">約 60~75 分鐘</div>
+          </div>
+          <div class="res-card">
+            <div class="res-label">充電器需輸出最高功率</div>
+            <div class="res-val" id="chgPower" style="color: #38bdf8;">252 W</div>
+          </div>
+          <div class="res-card">
+            <div class="res-label">電芯發熱與壽命狀態</div>
+            <div class="res-val" id="chgRisk" style="font-size: 1rem; color: #34d399;">標準推薦 / 循環壽命最佳</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 七、多串平衡與電芯不一致性（術語全面修訂） -->
+    <section id="balancing">
+      <h2>七、多串平衡充機制與串聯電芯不一致性分析</h2>
+      <p>在串聯電路中，各電芯之通過電流理論上嚴格相等（$I_1 = I_2 = \dots = I_n$）。然而，受材料塗佈容差、自放電率離散度以及模組內部散熱梯度之影響，電芯間勢必產生<strong>容量與阻抗不一致性（Cell-to-cell Inconsistency）</strong>。</p>
+
+      <h3>串聯容量受限機制（Capacity-limiting Effect）與危害</h3>
+      <ul>
+        <li><strong>無平衡充電機制時：</strong> 
+          組內之<strong>最低容量單芯（Minimum Capacity Cell）</strong>因可用荷電空間較小，將率先達到滿電電壓截點。若系統僅監測總電壓而缺乏單芯分流機制，該電芯將被迫承受持續電流，引發<strong>局部嚴重過充（Over-charging）</strong>、電解液劇烈氧化分解產氣，甚至造成化學熱失控。
+        </li>
+        <li><strong>放電容量受限時：</strong> 
+          在放電過程中，組內的<strong>最劣單芯（Worst-performing Cell）</strong>將作為整體迴路的<strong>限制因子（Bottleneck Cell）</strong>。該電芯將率先耗盡電荷並跌破最低保護電壓閥值（三元鋰低於 2.5V、LFP 低於 2.0V），引發<strong>局部深度過放電（Over-discharging）</strong>，造成陽極銅集流體電化學溶解與不可逆微短路報廢。
+        </li>
+      </ul>
+
+      <div class="grid">
+        <div class="card">
+          <div class="card-title">被動平衡 (Passive Balancing)</div>
+          <div class="card-value" style="font-size: 1.1rem; color: #fff;">耗能型旁路放電</div>
+          <div class="card-desc">充電末期導通並聯之 MOSFET，透過分流耗能電阻（Bleeding Resistor）將電壓超前之單芯多餘能量以熱能形式耗散（50mA~1.5A），等待落後單芯補滿。結構成熟可靠、成本低。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">主動平衡 (Active Balancing)</div>
+          <div class="card-value" style="font-size: 1.1rem; color: #fff;">雙向無損電荷轉移</div>
+          <div class="card-desc">藉由電感、電容或雙向 DC-DC 轉換拓撲，將高電位電芯之多餘能量動態泵入低電位單芯中，轉換效率高達 85% 以上且無顯著廢熱產生。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 八、內阻核心指標（術語全面修訂） -->
+    <section id="ir-health">
+      <h2>八、內阻（IR, mΩ）核心性能指標與健康狀態（SOH）判定</h2>
+      <p><strong>等效串聯阻抗（Internal Resistance，簡稱 IR，單位為毫歐姆 mΩ）</strong>是衡量電芯化學老化程度、動力響應與健康狀態（State of Health, SOH）最敏感的即時物理指標。容量衰減通常需經由完整充放電週期測量，而內阻之劣化往往於早期即已顯現。</p>
+
+      <div class="callout">
+        <strong>為什麼等效阻抗（IR）是核心動態指標？</strong>
+        <ol style="margin-top: 0.5rem; margin-bottom: 0;">
+          <li><strong>決定負載電壓降落（Voltage Sag）：</strong> 負載端電壓降落量由歐姆分壓定律決定（$\Delta V = I \times R_i$）。等效阻抗越高，在大負載加速或瞬態爬升時電壓崩塌愈深，極易提前觸發低壓保護機制。</li>
+          <li><strong>決定焦耳熱產熱功率：</strong> 電芯內部自發熱產生的功率遵循焦耳定律（$P = I^2 \times R_i$）。阻抗翻倍意味著相同負載電流下之<strong>內部產熱速率直接翻倍</strong>，加速固態電解質界面（SEI）熱劣化與外殼膨脹。</li>
+        </ol>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>單芯內阻區間 (以 3000~6000mAh 三元鋰電芯為例)</th>
+              <th>健康狀態 (SOH)</th>
+              <th>性能表現與處置建議</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1 mΩ ~ 5 mΩ</strong></td>
+              <td><span class="badge badge-success">極佳 / 全新出廠</span></td>
+              <td>輸出充沛，支援額定最大倍率放電，大電流動態壓降極低。</td>
+            </tr>
+            <tr>
+              <td><strong>6 mΩ ~ 12 mΩ</strong></td>
+              <td><span class="badge badge-success">良好正常使用期</span></td>
+              <td>適用正常巡航與任務執行，大負載下具微幅壓降，放電末期微溫。</td>
+            </tr>
+            <tr>
+              <td><strong>13 mΩ ~ 25 mΩ</strong></td>
+              <td><span class="badge badge-warning">化學老化 / 需降額</span></td>
+              <td>瞬態負載時電壓跌落顯著，易提早引發低電壓警報；應降額限制放電倍率。</td>
+            </tr>
+            <tr>
+              <td><strong>&gt; 25 mΩ ~ 30 mΩ</strong></td>
+              <td><span class="badge badge-danger">嚴重劣化 / 強制退役</span></td>
+              <td>放電熱耗損嚴重、可用能量大幅衰退且外殼極易鼓包；<strong>嚴禁使用於飛行載具</strong>。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout-danger">
+        <strong>退役與降額判定標準：</strong>
+        ① 單芯等效阻抗達到出廠基準值的 <strong>2.0 至 2.5 倍以上</strong>；<br>
+        ② 串聯組內某單芯阻抗超出其餘電芯 <strong>1.5 至 2.0 倍</strong>（此<strong>限制因子電芯 / Bottleneck Cell</strong>於高負載時發熱最高、電位最早塌陷，成為整組故障點）；<br>
+        ③ 經標準 0.5C 放電量測，全組可用總容量低於標稱額定值之 <strong>80%</strong>。
+      </div>
+    </section>
+
+    <!-- 九、低溫風險與析鋰機制 -->
+    <section id="low-temp">
+      <h2>九、低溫環境效能衰退、內阻暴增與析鋰危害</h2>
+      <p>鋰電池化學反應動力學高度仰賴溫度。環境溫度每降低 10°C，電解液離子擴散速率與電極界面電荷轉移反應速率均呈現顯著衰退：</p>
+
+      <h3>1. 低溫放電：等效阻抗暴增與「虛假低壓（Voltage Sag）」</h3>
+      <ul>
+        <li><strong>電解液黏度激增：</strong> 當環境溫度低於 10°C（特別是 0°C 以下），非水有機電解液黏滯度大幅提升，介質離子導電率急遽驟降。</li>
+        <li><strong>歐姆阻抗與極化阻抗倍增：</strong> 電芯總等效內阻常攀升至常溫狀態的 <strong>2 至 5 倍以上</strong>。</li>
+        <li><strong>動態壓降觸發保護：</strong> 負載稍有拉升，巨大的 $\Delta V = I \times R_i$ 端電壓跌落便迫使系統瞬間跌入安全截止電壓區，導致載具誤觸緊急返航或誘發無預警掉電關機。常溫下原本可釋放之標稱容量在極低溫下通常僅剩 50%～70%。</li>
+      </ul>
+
+      <h3>2. 低溫充電：電化學失效「析鋰反應（Lithium Plating）」</h3>
+      <div class="callout-danger callout">
+        <strong>安全紅線：</strong> 嚴禁在低於 0°C 的環境下對鋰電池進行常規或大電流充電！
+      </div>
+      <ul>
+        <li><strong>反應機理：</strong> 低溫環境下石墨陽極之層狀晶格收縮，固態擴散係數銳減。若強行輸入外加充電電流，來不及嵌入晶格之鋰離子被迫於石墨電極表面直接捕獲電子，還原沉積為<strong>金屬態活性鋰</strong>。</li>
+        <li><strong>破壞性危害：</strong> 沉積析出之金屬鋰易進一步生長為尖銳之<strong>鋰枝晶（Lithium Dendrites）</strong>，刺穿數十微米厚之微孔隔離膜，造成內部正負電極直接微短路，誘發<strong>不可逆熱失控、燃燒與爆裂</strong>。</li>
+      </ul>
+
+      <h3>低溫防護標準作業程序（SOP）</h3>
+      <ol>
+        <li><strong>放電作業溫度門檻：</strong> 電芯核心溫度建議達 <strong>15°C～20°C</strong> 以上再執行滿載或高強度動態作業。</li>
+        <li><strong>充電作業溫度門檻：</strong> 必須在電芯內部均勻回溫至 <strong>10°C～25°C</strong> 範圍內方可進行常規充電。</li>
+        <li><strong>多級預熱處置：</strong> 善用智慧電池自加熱薄膜或恆溫保溫箱；裝機開機後可先原地怠速運轉 1–2 分鐘，利用小電流自身焦耳熱（$I^2 R$）讓電芯內部自行回溫。</li>
+        <li><strong>防範冷凝水：</strong> 由嚴寒戶外進入室內時，需密封靜置 30 分鐘以上待均勻回溫，防止電路板表面產生凝結水氣引發電氣短路。</li>
+      </ol>
+    </section>
+  </main>
+</div>
+
+<script>
+  function updateTempCalc() {
+    const temp = parseFloat(document.getElementById('tempSlider').value);
+    const chem = document.getElementById('tempChem').value;
+    const baseCap = parseFloat(document.getElementById('tempBaseCap').value) || 0;
+    const baseIr = parseFloat(document.getElementById('tempBaseIr').value) || 0;
+
+    document.getElementById('tempDisplay').innerText = temp + '°C';
+
+    let irFactor = 1.0;
+    let capFactor = 1.0;
+
+    if (temp >= 25) {
+      irFactor = Math.max(0.75, 1.0 - (temp - 25) * 0.015);
+      capFactor = Math.min(1.02, 1.0 + (temp - 25) * 0.001);
+    } else {
+      const deltaT = 25 - temp;
+      if (chem === 'lfp') {
+        irFactor = 1.0 + Math.pow(deltaT / 12, 1.8);
+        capFactor = Math.max(0.35, 1.0 - Math.pow(deltaT / 35, 1.5));
+      } else {
+        irFactor = 1.0 + Math.pow(deltaT / 14, 1.7);
+        capFactor = Math.max(0.50, 1.0 - Math.pow(deltaT / 40, 1.4));
+      }
+    }
+
+    const effIr = baseIr * irFactor;
+    const actualCap = baseCap * capFactor;
+    const capPct = capFactor * 100;
+
+    document.getElementById('tempEffIr').innerText = effIr.toFixed(2) + ' mΩ';
+    document.getElementById('tempIrFactor').innerText = irFactor.toFixed(2) + ' ×';
+    document.getElementById('tempCapPercent').innerText = capPct.toFixed(1) + ' %';
+    document.getElementById('tempActualCap').innerText = Math.round(actualCap) + ' mAh';
+
+    const statusElem = document.getElementById('tempStatusText');
+    const guideElem = document.getElementById('tempActionGuidance');
+
+    if (temp < 0) {
+      statusElem.innerText = '極寒危險：嚴禁充電！放電容量大縮水且壓降劇烈';
+      statusElem.style.color = 'var(--danger)';
+      guideElem.innerText = '嚴禁直接接入充電器（引發枝晶析鋰短路）。放電前必須使用保溫箱或自發熱膜預熱至 15°C 以上，並調降飛行速度與負載。';
+    } else if (temp < 15) {
+      statusElem.innerText = '低溫受限：內阻明顯增加，需預熱與降額使用';
+      statusElem.style.color = 'var(--warning)';
+      guideElem.innerText = '充電前應回溫至 10°C 以上；起飛前建議開機怠速 1–2 分鐘自發熱，提防急速爬升觸發低電壓警報。';
+    } else if (temp <= 35) {
+      statusElem.innerText = '常溫標準：充放電效能與循環壽命最佳區間';
+      statusElem.style.color = 'var(--success)';
+      guideElem.innerText = '可正常進行 1.0C 標準充電與標稱倍率放電，無額外溫控限制。';
+    } else {
+      statusElem.innerText = '高溫過熱：副反應加劇，需防範熱失控';
+      statusElem.style.color = 'var(--warning)';
+      guideElem.innerText = '放電後嚴禁立即充電，需靜置通風降溫至 30°C 以下再行充電；切勿將電池留置曝曬車廂內。';
+    }
+  }
+
+  function runStorageCalc() {
+    const chem = document.getElementById('storageChem').value;
+    const s = parseInt(document.getElementById('storageS').value, 10);
+
+    const perCellStorage = (chem === 'lfp') ? 3.28 : 3.85;
+    const perCellFull = (chem === 'lfp') ? 3.65 : 4.20;
+
+    const totalStorageV = s * perCellStorage;
+    const totalFullV = s * perCellFull;
+
+    document.getElementById('storageTotalV').innerText = totalStorageV.toFixed(2) + ' V';
+    document.getElementById('storageFullV').innerText = totalFullV.toFixed(2) + ' V';
+
+    if (chem === 'lipo') {
+      document.getElementById('storageAction').innerText = '三元/LiPo：超過 48 小時不使用必轉 Storage 模式';
+    } else {
+      document.getElementById('storageAction').innerText = 'LFP：存儲電壓位於平台中段，化學結構最穩定';
+    }
+  }
+
+  function runDischargeCalc() {
+    const chem = document.getElementById('chemType').value;
+    const s = parseInt(document.getElementById('cellCount').value, 10);
+    const mah = parseFloat(document.getElementById('capMah').value) || 0;
+    const c = parseFloat(document.getElementById('cRate').value) || 0;
+    const irPerCell = parseFloat(document.getElementById('cellIr').value) || 0;
+
+    const cellNominalV = (chem === 'lfp') ? 3.2 : 3.7;
+    const nominalV = s * cellNominalV;
+    const ah = mah / 1000;
+
+    const wh = nominalV * ah;
+    document.getElementById('resWh').innerText = wh.toFixed(1) + ' Wh';
+
+    const amp = c * ah;
+    document.getElementById('resAmp').innerText = amp.toFixed(1) + ' A';
+
+    const runtimeMin = c > 0 ? (60 / c) : 0;
+    document.getElementById('resRuntime').innerText = runtimeMin.toFixed(1) + ' 分鐘';
+
+    const totalIrOhm = (s * irPerCell) / 1000;
+    const sag = amp * totalIrOhm;
+    document.getElementById('resSag').innerText = sag.toFixed(2) + ' V';
+  }
+
+  function setCVal(cVal) {
+    document.getElementById('customCRate').value = cVal.toFixed(1);
+    
+    const btns = document.querySelectorAll('.quick-c-btn');
+    btns.forEach(btn => {
+      if (btn.innerText.includes(cVal.toFixed(1) + 'C') || (cVal === 0.5 && btn.innerText.includes('0.5C'))) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+
+    updateChargeCalc();
+  }
+
+  function onCustomCInput() {
+    const btns = document.querySelectorAll('.quick-c-btn');
+    btns.forEach(btn => btn.classList.remove('active'));
+    updateChargeCalc();
+  }
+
+  function updateChargeCalc() {
+    const chem = document.getElementById('chgChem').value;
+    const cap = parseFloat(document.getElementById('chgCap').value) || 0;
+    const s = parseInt(document.getElementById('chgS').value, 10);
+    const c = parseFloat(document.getElementById('customCRate').value) || 0;
+
+    const ah = cap / 1000;
+    const chgA = c * ah;
+
+    const cellMaxV = (chem === 'lfp') ? 3.65 : 4.20;
+    const maxV = s * cellMaxV;
+    const minP = maxV * chgA;
+
+    document.getElementById('chgCurrent').innerText = chgA.toFixed(1) + ' A';
+    document.getElementById('chgPower').innerText = Math.round(minP) + ' W';
+
+    let durationText = '';
+    let riskText = '';
+    let riskColor = '#34d399';
+
+    if (c <= 0) {
+      durationText = '請輸入有效 C 數';
+      riskText = '--';
+    } else if (c <= 0.6) {
+      durationText = '約 120 ~ 150 分鐘';
+      riskText = '超長壽命 / 電芯完全不發熱';
+      riskColor = '#34d399';
+    } else if (c <= 1.2) {
+      durationText = '約 60 ~ 75 分鐘';
+      riskText = '標準推薦 / 壽命與速度平衡最佳';
+      riskColor = '#34d399';
+    } else if (c <= 2.2) {
+      durationText = '約 35 ~ 45 分鐘';
+      riskText = '快充模式 / 電芯微溫，需注意通風';
+      riskColor = '#fbbf24';
+    } else if (c <= 3.2) {
+      durationText = '約 25 ~ 30 分鐘';
+      riskText = '極速快充 / 發熱明顯，需強制散熱，頻繁使用縮短壽命';
+      riskColor = '#f97316';
+    } else {
+      durationText = '約 18 ~ 22 分鐘';
+      riskText = '超充極限 / 強烈產熱與析鋰風險！非高倍率電芯嚴禁使用';
+      riskColor = '#ef4444';
+    }
+
+    document.getElementById('chgDuration').innerText = durationText;
+    const riskElem = document.getElementById('chgRisk');
+    riskElem.innerText = riskText;
+    riskElem.style.color = riskColor;
+  }
+
+  updateTempCalc();
+  runStorageCalc();
+  runDischargeCalc();
+  updateChargeCalc();
+</script>
+
+</body>
+</html>
